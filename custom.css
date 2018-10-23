@@ -1,0 +1,23 @@
+body {
+    background-image: url("sg.png");
+}
+
+.card-title {
+    margin-bottom: 0;
+}
+
+.card {
+    border: 2px solid #333;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.form-control {
+    background-color: #888;
+}
+
+.table th, .table td {
+    border-top: 0px;
+}

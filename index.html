@@ -1,0 +1,63 @@
+<!doctype html>
+<html ng-app="stargazer">
+
+<head>
+    <meta charset="utf-8">
+    <title>Star Gazer</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap-darkly.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/starwars.js"></script>
+    <script src="services/starservice.js"></script>
+    <script src="directives/card.js"></script>
+    <script src="directives/modal.js"></script>
+
+    <!-- Other -->
+    <link rel="stylesheet" href="custom.css">
+</head>
+
+<body >
+    <div>
+        <div class="container" ng-controller="StarController as sc">
+            <h1 class="display-4">Star Gazer</h1>
+            <p class="text-muted">Velkommen til Star Gazer. Her kan du søke om info om Star Wars karakterer.</p>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" ng-change="sc.getList()" ng-model="sc.search" placeholder="Søk etter et karakternavn"
+                    aria-label="Søk etter et karakternavn" aria-describedby="basic-addon2">
+            </div>
+            <div class="row" ng-show="sc.count">
+                <div class="col-md-3 mb-3" ng-repeat="result in sc.results">
+                    <card title="{{result.Navn}}" click="sc.getInfo" id="{{result.Id}}" picture="{{result.Bilde}}"></card>
+                </div>
+            </div>
+            <modal title="{{sc.character.name}}">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{sc.character.image}}" alt="Image of {{sc.character.name}}" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <card body="sc.character.info"></card>
+                    </div>
+                </div>
+                <div class="row" ng-show="sc.character.ships.length > 0">
+                    <div class="col-md-6 mb-3" ng-repeat="ship in sc.character.ships">
+                        <card title="{{ship.name}}" body="ship.info"></card>
+                    </div>
+                </div>
+            </modal>
+        </div>
+    </div>
+</body>
+
+</html>
